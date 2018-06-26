@@ -1,6 +1,6 @@
 ## mini-game-angular
 
-> A Angular project based on Angular CLI Webpack template.
+> Small puzzle game based on Angular CLI webpack template. https://scp002.github.io/mini-game-angular/dist/
 
 ## Game rules
 
@@ -23,7 +23,16 @@ ng build --prod
 
 ## Notes
 
-Production build does not work with `file://` protocol.
+To get production build work with Github Pages, use following command:
+
+``` bash
+ng build --prod --base-href "https://<user-name>.github.io/<repo-name>/<dist-folder>/"
+
+# In current case:
+ng build --prod --base-href "https://scp002.github.io/mini-game-angular/dist/"
+```
+
+Also, production build does not work with `file://` protocol.
 
 Use HTTP server, for example:
 
