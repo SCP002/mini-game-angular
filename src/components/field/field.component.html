@@ -1,0 +1,13 @@
+<div class="field">
+    <table>
+        <tbody>
+        <tr *ngFor="let row of getRows(); index as rowIndex">
+            <td *ngFor="let cell of row.getCells(); index as cellIndex">
+                <button [class.active]="cell.getIsActive()"
+                        (click)="onCellClick(rowIndex, cellIndex)">
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

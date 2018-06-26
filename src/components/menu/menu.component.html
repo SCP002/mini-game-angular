@@ -1,0 +1,38 @@
+<div class="menu">
+    <div>
+        <p>STEPS COUNTER: {{getStats().getStepsAmount()}}</p>
+    </div>
+
+    <div>
+        <p>FIELD SIZE: {{getOptions().getRowsAmount()}} X {{getOptions().getColumnsAmount()}}</p>
+        <label>ROWS:
+            <input type="range" min="1" max="9" step="1" #rowsInput
+                   [ngModel]="getOptions().getRowsAmount()"
+                   (change)="getOptions().setRowsAmount(rowsInput.value)"
+            >
+        </label>
+        <label>COLUMNS:
+            <input type="range" min="1" max="9" step="1" #columnsInput
+                   [ngModel]="getOptions().getColumnsAmount()"
+                   (change)="getOptions().setColumnsAmount(columnsInput.value)"
+            >
+        </label>
+    </div>
+
+    <div>
+        <label>CHANGE CLICKED CELL:
+            <input type="checkbox" #cellStateInput
+                   [ngModel]="getOptions().getChangeClickedCell()"
+                   (change)="getOptions().setChangeClickedCell(cellStateInput.checked)"
+            >
+        </label>
+    </div>
+
+    <div>
+        <button (click)="randomizeField()">RANDOMIZE FIELD</button>
+    </div>
+
+    <div>
+        <button (click)="showAbout()">ABOUT</button>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+div.field {
+    padding: 20px;
+}
+
+div.field button {
+    background-color: #f08080;
+    height: 10vh;
+    width: 10vh;
+}
+
+div.field button.active {
+    background-color: #90ee90;
+}

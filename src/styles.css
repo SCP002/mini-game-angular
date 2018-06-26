@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+    bottom: 1px;
+    display: inline-block;
+    height: 1.3em;
+    position: relative;
+    vertical-align: middle;
+    width: 1.3em;
+}
