@@ -11,21 +11,29 @@ export class OptionsService {
 
     private changeClickedCell = false;
 
-    public readonly rowsAmountSub: Subject<number> = new Subject<number>();
-    public readonly columnsAmountSub: Subject<number> = new Subject<number>();
+    private readonly rowsAmountSub: Subject<number> = new Subject<number>();
+    private readonly columnsAmountSub: Subject<number> = new Subject<number>();
 
     private constructor() {
-        this.rowsAmountSub.subscribe(value => {
+        this.rowsAmountSub.subscribe((value: number) => {
             this.rowsAmount = value;
         });
 
-        this.columnsAmountSub.subscribe(value => {
+        this.columnsAmountSub.subscribe((value: number) => {
             this.columnsAmount = value;
         });
     }
 
     public getRowsAmount(): number {
         return this.rowsAmount;
+    }
+
+    public getRowsAmountSub(): Subject<number> {
+        return this.rowsAmountSub;
+    }
+
+    public getColumnsAmountSub(): Subject<number> {
+        return this.columnsAmountSub;
     }
 
     public getColumnsAmount(): number {

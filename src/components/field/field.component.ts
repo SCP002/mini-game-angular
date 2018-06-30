@@ -21,15 +21,15 @@ export class FieldComponent implements OnInit {
     public ngOnInit() {
         this.createField();
 
-        this.options.rowsAmountSub.subscribe(() => {
+        this.options.getRowsAmountSub().subscribe(() => {
             this.createField();
         });
 
-        this.options.columnsAmountSub.subscribe(() => {
+        this.options.getColumnsAmountSub().subscribe(() => {
             this.createField();
         });
 
-        this.events.eventsSub.subscribe((event: Event) => {
+        this.events.getEventsSub().subscribe((event: Event) => {
             if (event === Event.CREATE_FIELD) {
                 this.createField();
             }

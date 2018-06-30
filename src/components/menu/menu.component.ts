@@ -18,12 +18,32 @@ export class MenuComponent implements OnInit {
         //
     }
 
-    public getStats(): StatsService {
-        return this.stats;
+    public getStepsAmount(): number {
+        return this.stats.getStepsAmount();
     }
 
-    public getOptions(): OptionsService {
-        return this.options;
+    public getRowsAmount(): number {
+        return this.options.getRowsAmount();
+    }
+
+    public getColumnsAmount(): number {
+        return this.options.getColumnsAmount();
+    }
+
+    public getChangeClickedCell(): boolean {
+        return this.options.getChangeClickedCell();
+    }
+
+    public setRowsAmount(value: number): void {
+        this.options.setRowsAmount(value);
+    }
+
+    public setColumnsAmount(value: number): void {
+        this.options.setColumnsAmount(value);
+    }
+
+    public setChangeClickedCell(value: boolean): void {
+        this.options.setChangeClickedCell(value);
     }
 
     public randomizeField(): void {

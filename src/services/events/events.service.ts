@@ -6,10 +6,14 @@ import {Subject} from 'rxjs/internal/Subject';
 })
 export class EventsService {
 
-    public readonly eventsSub: Subject<Event> = new Subject<Event>();
+    private readonly eventsSub: Subject<Event> = new Subject<Event>();
 
     private constructor() {
         //
+    }
+
+    public getEventsSub(): Subject<Event> {
+        return this.eventsSub;
     }
 
     public emit(event: Event): void {
