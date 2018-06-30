@@ -4,8 +4,8 @@ div.field {
 
 div.field button {
     background-color: #f08080;
-    height: 10vh;
-    width: 10vh;
+    height: 8.5vh;
+    width: 8.5vh;
 }
 
 div.field button.active {
