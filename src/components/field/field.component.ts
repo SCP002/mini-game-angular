@@ -12,31 +12,33 @@ import {Row} from './row';
 })
 export class FieldComponent implements OnInit {
 
-    private rows: Array<Row> = [];
+    private rows: Row[] = [];
 
-    public constructor(private stats: StatsService, private options: OptionsService, private events: EventsService) {
+    public constructor(private readonly stats: StatsService,
+                       private readonly options: OptionsService,
+                       private readonly events: EventsService) {
         //
     }
 
     public ngOnInit() {
         this.createField();
 
-        this.options.getRowsAmountSub().subscribe(() => {
+        this.options.getRowsAmountObs().subscribe(() => {
             this.createField();
         });
 
-        this.options.getColumnsAmountSub().subscribe(() => {
+        this.options.getColumnsAmountObs().subscribe(() => {
             this.createField();
         });
 
-        this.events.getEventsSub().subscribe((event: Event) => {
+        this.events.getEventsObs().subscribe((event: Event) => {
             if (event === Event.CREATE_FIELD) {
                 this.createField();
             }
         });
     }
 
-    public getRows(): Array<Row> {
+    public getRows(): Row[] {
         return this.rows;
     }
 

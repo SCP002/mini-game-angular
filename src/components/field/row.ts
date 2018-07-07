@@ -2,9 +2,9 @@ import {Cell} from './cell';
 
 export class Row {
 
-    private readonly cells: Array<Cell> = [];
+    private readonly cells: Cell[] = [];
 
-    public getCells(): Array<Cell> {
+    public getCells(): Cell[] {
         return this.cells;
     }
 

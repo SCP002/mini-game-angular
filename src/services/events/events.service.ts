@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs/internal/Subject';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -12,8 +12,8 @@ export class EventsService {
         //
     }
 
-    public getEventsSub(): Subject<Event> {
-        return this.eventsSub;
+    public getEventsObs(): Observable<Event> {
+        return this.eventsSub.asObservable();
     }
 
     public emit(event: Event): void {

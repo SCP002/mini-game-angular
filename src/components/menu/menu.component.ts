@@ -10,7 +10,9 @@ import {StatsService} from '../../services/stats/stats.service';
 })
 export class MenuComponent implements OnInit {
 
-    public constructor(private stats: StatsService, private options: OptionsService, private events: EventsService) {
+    public constructor(private readonly stats: StatsService,
+                       private readonly options: OptionsService,
+                       private readonly events: EventsService) {
         //
     }
 

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs/internal/Subject';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -28,12 +28,12 @@ export class OptionsService {
         return this.rowsAmount;
     }
 
-    public getRowsAmountSub(): Subject<number> {
-        return this.rowsAmountSub;
+    public getRowsAmountObs(): Observable<number> {
+        return this.rowsAmountSub.asObservable();
     }
 
-    public getColumnsAmountSub(): Subject<number> {
-        return this.columnsAmountSub;
+    public getColumnsAmountObs(): Observable<number> {
+        return this.columnsAmountSub.asObservable();
     }
 
     public getColumnsAmount(): number {
