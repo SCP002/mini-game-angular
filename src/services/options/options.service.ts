@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {Event, EventsService} from '../events/events.service';
 
 @Injectable({
     providedIn: 'root'
@@ -8,32 +8,14 @@ export class OptionsService {
 
     private rowsAmount = 1;
     private columnsAmount = 6;
-
     private changeClickedCell = false;
 
-    private readonly rowsAmountSub: Subject<number> = new Subject<number>();
-    private readonly columnsAmountSub: Subject<number> = new Subject<number>();
-
-    private constructor() {
-        this.rowsAmountSub.subscribe((value: number) => {
-            this.rowsAmount = value;
-        });
-
-        this.columnsAmountSub.subscribe((value: number) => {
-            this.columnsAmount = value;
-        });
+    private constructor(private readonly events: EventsService) {
+        //
     }
 
     public getRowsAmount(): number {
         return this.rowsAmount;
-    }
-
-    public getRowsAmountObs(): Observable<number> {
-        return this.rowsAmountSub.asObservable();
-    }
-
-    public getColumnsAmountObs(): Observable<number> {
-        return this.columnsAmountSub.asObservable();
     }
 
     public getColumnsAmount(): number {
@@ -45,11 +27,15 @@ export class OptionsService {
     }
 
     public setRowsAmount(value: number): void {
-        this.rowsAmountSub.next(value);
+        this.rowsAmount = value;
+
+        this.events.emit(Event.CREATE_FIELD);
     }
 
     public setColumnsAmount(value: number): void {
-        this.columnsAmountSub.next(value);
+        this.columnsAmount = value;
+
+        this.events.emit(Event.CREATE_FIELD);
     }
 
     public setChangeClickedCell(value: boolean): void {
