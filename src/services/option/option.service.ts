@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
-import {Event, EventsService} from '../events/events.service';
+import {Event, EventService} from '../event/event.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class OptionsService {
+export class OptionService {
 
     private rowsAmount = 1;
     private columnsAmount = 6;
     private changeClickedCell = false;
 
-    private constructor(private readonly events: EventsService) {
+    private constructor(private readonly eventSvc: EventService) {
         //
     }
 
@@ -29,13 +29,13 @@ export class OptionsService {
     public setRowsAmount(value: number): void {
         this.rowsAmount = value;
 
-        this.events.emit(Event.CREATE_FIELD);
+        this.eventSvc.emit(Event.CREATE_FIELD);
     }
 
     public setColumnsAmount(value: number): void {
         this.columnsAmount = value;
 
-        this.events.emit(Event.CREATE_FIELD);
+        this.eventSvc.emit(Event.CREATE_FIELD);
     }
 
     public setChangeClickedCell(value: boolean): void {

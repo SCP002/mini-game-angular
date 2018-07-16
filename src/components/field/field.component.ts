@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Event, EventsService} from '../../services/events/events.service';
-import {OptionsService} from '../../services/options/options.service';
-import {StatsService} from '../../services/stats/stats.service';
+import {Event, EventService} from '../../services/event/event.service';
+import {OptionService} from '../../services/option/option.service';
+import {StatService} from '../../services/stat/stat.service';
 import {Cell} from './cell';
 import {Row} from './row';
 
@@ -14,16 +14,16 @@ export class FieldComponent implements OnInit {
 
     private rows: Row[] = [];
 
-    public constructor(private readonly stats: StatsService,
-                       private readonly options: OptionsService,
-                       private readonly events: EventsService) {
+    public constructor(private readonly statSvc: StatService,
+                       private readonly optionSvc: OptionService,
+                       private readonly eventSvc: EventService) {
         //
     }
 
     public ngOnInit() {
         this.createField();
 
-        this.events.getEventsObs().subscribe((event: Event) => {
+        this.eventSvc.getEventObs().subscribe((event: Event) => {
             if (event === Event.CREATE_FIELD) {
                 this.createField();
             }
@@ -35,9 +35,9 @@ export class FieldComponent implements OnInit {
     }
 
     public onCellClick(rowIndex: number, cellIndex: number): void {
-        this.stats.addStep();
+        this.statSvc.addStep();
 
-        if (this.options.getChangeClickedCell()) {
+        if (this.optionSvc.getChangeClickedCell()) {
             this.revertCellState(rowIndex, cellIndex);
         }
 
@@ -47,20 +47,20 @@ export class FieldComponent implements OnInit {
         this.revertCellState(rowIndex + 1, cellIndex);
 
         if (this.isWin()) {
-            window.alert('You win in ' + this.stats.getStepsAmount() + ' steps!');
+            window.alert('You win in ' + this.statSvc.getStepsAmount() + ' steps!');
 
             this.createField();
         }
     }
 
     private createField(): void {
-        this.stats.setStepsAmount(0);
+        this.statSvc.setStepsAmount(0);
         this.rows = [];
 
-        for (let i = 0; i < this.options.getRowsAmount(); ++i) {
+        for (let i = 0; i < this.optionSvc.getRowsAmount(); ++i) {
             const row: Row = new Row();
 
-            for (let j = 0; j < this.options.getColumnsAmount(); ++j) {
+            for (let j = 0; j < this.optionSvc.getColumnsAmount(); ++j) {
                 const cell: Cell = new Cell();
 
                 row.addCell(cell);
@@ -82,7 +82,7 @@ export class FieldComponent implements OnInit {
     private isWin(): boolean {
         for (const row of this.rows) {
             for (const cell of row.getCells()) {
-                if (!cell.getIsActive()) {
+                if (!cell.isActive()) {
                     return false;
                 }
             }

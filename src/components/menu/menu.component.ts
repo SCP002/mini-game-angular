@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Event, EventsService} from '../../services/events/events.service';
-import {OptionsService} from '../../services/options/options.service';
-import {StatsService} from '../../services/stats/stats.service';
+import {Event, EventService} from '../../services/event/event.service';
+import {OptionService} from '../../services/option/option.service';
+import {StatService} from '../../services/stat/stat.service';
 
 @Component({
     selector: 'app-menu',
@@ -10,9 +10,9 @@ import {StatsService} from '../../services/stats/stats.service';
 })
 export class MenuComponent implements OnInit {
 
-    public constructor(private readonly stats: StatsService,
-                       private readonly options: OptionsService,
-                       private readonly events: EventsService) {
+    public constructor(private readonly statSvc: StatService,
+                       private readonly optionSvc: OptionService,
+                       private readonly eventSvc: EventService) {
         //
     }
 
@@ -21,35 +21,35 @@ export class MenuComponent implements OnInit {
     }
 
     public getStepsAmount(): number {
-        return this.stats.getStepsAmount();
+        return this.statSvc.getStepsAmount();
     }
 
     public getRowsAmount(): number {
-        return this.options.getRowsAmount();
+        return this.optionSvc.getRowsAmount();
     }
 
     public getColumnsAmount(): number {
-        return this.options.getColumnsAmount();
+        return this.optionSvc.getColumnsAmount();
     }
 
     public getChangeClickedCell(): boolean {
-        return this.options.getChangeClickedCell();
+        return this.optionSvc.getChangeClickedCell();
     }
 
     public setRowsAmount(value: number): void {
-        this.options.setRowsAmount(value);
+        this.optionSvc.setRowsAmount(value);
     }
 
     public setColumnsAmount(value: number): void {
-        this.options.setColumnsAmount(value);
+        this.optionSvc.setColumnsAmount(value);
     }
 
     public setChangeClickedCell(value: boolean): void {
-        this.options.setChangeClickedCell(value);
+        this.optionSvc.setChangeClickedCell(value);
     }
 
     public randomizeField(): void {
-        this.events.emit(Event.CREATE_FIELD);
+        this.eventSvc.emit(Event.CREATE_FIELD);
     }
 
     public showAbout(): void {

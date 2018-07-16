@@ -1,17 +1,17 @@
 export class Cell {
 
-    private isActive: boolean = Cell.getRandomBoolean();
+    private active: boolean = Cell.getRandomBoolean();
 
     private static getRandomBoolean(): boolean {
         return Math.random() >= 0.5;
     }
 
-    public getIsActive(): boolean {
-        return this.isActive;
+    public isActive(): boolean {
+        return this.active;
     }
 
     public revertState(): void {
-        this.isActive = !this.isActive;
+        this.active = !this.active;
     }
 
 }

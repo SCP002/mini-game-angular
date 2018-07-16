@@ -4,20 +4,20 @@ import {Observable, Subject} from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class EventsService {
+export class EventService {
 
-    private readonly eventsSub: Subject<Event> = new Subject<Event>();
+    private readonly eventSub: Subject<Event> = new Subject<Event>();
 
     private constructor() {
         //
     }
 
-    public getEventsObs(): Observable<Event> {
-        return this.eventsSub.asObservable();
+    public getEventObs(): Observable<Event> {
+        return this.eventSub.asObservable();
     }
 
     public emit(event: Event): void {
-        this.eventsSub.next(event);
+        this.eventSub.next(event);
     }
 
 }

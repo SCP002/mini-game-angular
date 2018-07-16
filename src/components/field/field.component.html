@@ -3,7 +3,7 @@
         <tbody>
         <tr *ngFor="let row of getRows(); index as rowIndex">
             <td *ngFor="let cell of row.getCells(); index as cellIndex">
-                <button [class.active]="cell.getIsActive()"
+                <button [class.active]="cell.isActive()"
                         (click)="onCellClick(rowIndex, cellIndex)">
                 </button>
             </td>
