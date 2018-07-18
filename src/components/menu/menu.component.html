@@ -4,17 +4,19 @@
     </div>
 
     <div>
-        <p>FIELD SIZE: {{getRowsAmount()}} X {{getColumnsAmount()}}</p>
+        <p>FIELD SIZE: {{getDisplayRows()}} X {{getDisplayCols()}}</p>
         <label>ROWS:
             <input type="range" min="1" max="9" step="1" #rowsInput
-                   [ngModel]="getRowsAmount()"
-                   (change)="setRowsAmount(rowsInput.value)"
+                   (change)="setRowsAmount()"
+                   [ngModel]="getDisplayRows()"
+                   (ngModelChange)="setDisplayRows(rowsInput.value)"
             >
         </label>
         <label>COLUMNS:
-            <input type="range" min="1" max="9" step="1" #columnsInput
-                   [ngModel]="getColumnsAmount()"
-                   (change)="setColumnsAmount(columnsInput.value)"
+            <input type="range" min="1" max="9" step="1" #colsInput
+                   (change)="setColsAmount()"
+                   [ngModel]="getDisplayCols()"
+                   (ngModelChange)="setDisplayCols(colsInput.value)"
             >
         </label>
     </div>
@@ -22,7 +24,7 @@
     <div>
         <label>CHANGE CLICKED CELL:
             <input type="checkbox" #cellStateInput
-                   [ngModel]="getChangeClickedCell()"
+                   [value]="getChangeClickedCell()"
                    (change)="setChangeClickedCell(cellStateInput.checked)"
             >
         </label>

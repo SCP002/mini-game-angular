@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 })
 export class StatService {
 
-    private stepsAmount: number;
+    private stepsAmount = 0;
 
     private constructor() {
         //

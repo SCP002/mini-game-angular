@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Event, EventService} from '../../services/event/event.service';
+import {FieldService} from '../../services/field/field.service';
 import {OptionService} from '../../services/option/option.service';
 import {StatService} from '../../services/stat/stat.service';
 
@@ -10,9 +10,12 @@ import {StatService} from '../../services/stat/stat.service';
 })
 export class MenuComponent implements OnInit {
 
+    private displayRows: number = this.optionSvc.getRowsAmount();
+    private displayCols: number = this.optionSvc.getColsAmount();
+
     public constructor(private readonly statSvc: StatService,
                        private readonly optionSvc: OptionService,
-                       private readonly eventSvc: EventService) {
+                       private readonly fieldSvc: FieldService) {
         //
     }
 
@@ -20,28 +23,40 @@ export class MenuComponent implements OnInit {
         //
     }
 
+    public getDisplayRows(): number {
+        return this.displayRows;
+    }
+
+    public getDisplayCols(): number {
+        return this.displayCols;
+    }
+
     public getStepsAmount(): number {
         return this.statSvc.getStepsAmount();
-    }
-
-    public getRowsAmount(): number {
-        return this.optionSvc.getRowsAmount();
-    }
-
-    public getColumnsAmount(): number {
-        return this.optionSvc.getColumnsAmount();
     }
 
     public getChangeClickedCell(): boolean {
         return this.optionSvc.getChangeClickedCell();
     }
 
-    public setRowsAmount(value: number): void {
-        this.optionSvc.setRowsAmount(value);
+    public setDisplayRows(value: number): void {
+        this.displayRows = value;
     }
 
-    public setColumnsAmount(value: number): void {
-        this.optionSvc.setColumnsAmount(value);
+    public setDisplayCols(value: number): void {
+        this.displayCols = value;
+    }
+
+    public setRowsAmount(): void {
+        this.optionSvc.setRowsAmount(this.displayRows);
+
+        this.fieldSvc.createField();
+    }
+
+    public setColsAmount(): void {
+        this.optionSvc.setColsAmount(this.displayCols);
+
+        this.fieldSvc.createField();
     }
 
     public setChangeClickedCell(value: boolean): void {
@@ -49,7 +64,7 @@ export class MenuComponent implements OnInit {
     }
 
     public randomizeField(): void {
-        this.eventSvc.emit(Event.CREATE_FIELD);
+        this.fieldSvc.createField();
     }
 
     public showAbout(): void {
